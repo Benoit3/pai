@@ -34,12 +34,14 @@ event_map = {
         change=dict(open=False),
         type="zone",
         message="Zone {label} OK",
+        hook_fn=_request_status_refresh,
     ),
     1: dict(
         level=EventLevel.DEBUG,
         change=dict(open=True),
         type="zone",
         message="Zone {label} open",
+        hook_fn=_request_status_refresh,
     ),
     2: dict(
         level=EventLevel.WARN,

@@ -506,7 +506,7 @@ class Paradox:
         # Apply state changes
 
         # Refresh status
-        self.request_status_refresh()  # Trigger status update
+        #self.request_status_refresh()  # Trigger status update
 
         return accepted
 
@@ -619,8 +619,8 @@ class Paradox:
             # Temporary end
 
             # The event has changes. Update the state
-            if len(evt.change) > 0 and element:
-                self.storage.update_container_object(evt.type, evt.id, evt.change)
+            #if len(evt.change) > 0 and element:
+            #    self.storage.update_container_object(evt.type, evt.id, evt.change)
 
             ps.sendEvent(evt)
 

@@ -178,45 +178,45 @@ RAMDataParserMap = {
             "troubles"
             / BitStruct( # time_lost_trouble when actually battery_failure
                 "time_lost_trouble" / Flag,
-                "zone_fault_trouble" / Flag,
-                "zone_low_battery_trouble" / Flag,
+                "_zone_fault_trouble" / Flag,
+                "_zone_low_battery_trouble" / Flag,
                 "zone_tamper_trouble" / Flag,
-                "module_supervision_trouble" / Flag,  # BusCom
+                "_module_supervision_trouble" / Flag,  # BusCom
                 "module_trouble" / Flag,
-                "dialer_trouble" / Flag,
-                "system_trouble" / Flag,
+                "_dialer_trouble" / Flag,
+                "_system_trouble" / Flag,
 
-                "panel_tamper_trouble" / Flag,
+                "_panel_tamper_trouble" / Flag,
                 "_future_use_0" / Flag,
-                "rom_error_trouble" / Flag,
-                "bell_absent_trouble" / Flag,
-                "bell_limit_trouble" / Flag,
-                "aux_limit_trouble" / Flag,
+                "_rom_error_trouble" / Flag,
+                "_bell_absent_trouble" / Flag,
+                "_bell_limit_trouble" / Flag,
+                "_aux_limit_trouble" / Flag,
                 "battery_failure_trouble" / Flag,
                 "ac_trouble" / Flag,
 
                 "_future_use_1" / Flag,
                 "_future_use_2" / Flag,
-                "com_pc_trouble" / Flag,
-                "fail_central_4_trouble" / Flag,
-                "fail_central_3_trouble" / Flag,
-                "fail_central_2_trouble" / Flag,
-                "fail_central_1_trouble" / Flag,
-                "tlm_trouble" / Flag,
+                "_com_pc_trouble" / Flag,
+                "_fail_central_4_trouble" / Flag,
+                "_fail_central_3_trouble" / Flag,
+                "_fail_central_2_trouble" / Flag,
+                "_fail_central_1_trouble" / Flag,
+                "_tlm_trouble" / Flag,
 
-                "module_aux_trouble" / Flag,
-                "module_battery_fail" / Flag,
-                "module_ac_trouble" / Flag,
-                "module_printer_trouble" / Flag,
-                "module_fail_to_com_trouble" / Flag,
-                "module_tlm_trouble" / Flag,
-                "module_rom_error_trouble" / Flag,
+                "_module_aux_trouble" / Flag,
+                "_module_battery_fail" / Flag,
+                "_module_ac_trouble" / Flag,
+                "_module_printer_trouble" / Flag,
+                "_module_fail_to_com_trouble" / Flag,
+                "_module_tlm_trouble" / Flag,
+                "_module_rom_error_trouble" / Flag,
                 "module_tamper_trouble" / Flag,
 
-                "mdl_com_error" / Flag,
+                "_mdl_com_error" / Flag,
                 "bus_overload_trouble" / Flag,
                 "bus_global_fail" / Flag,
-                "safety_mismatch_trouble" / Flag,
+                "_safety_mismatch_trouble" / Flag,
                 "_future_use_3" / Flag,
                 "_future_use_4" / Flag,
                 "missing_module_trouble" / Flag,
@@ -224,7 +224,7 @@ RAMDataParserMap = {
             ),
             "date"
             / Struct(
-                "weekday" / Computed(lambda ctx: ctx._._._weekday),
+                "_weekday" / Computed(lambda ctx: ctx._._._weekday),
                 "time" / DateAdapter(Bytes(7)),
             ),
             "power"
@@ -253,7 +253,7 @@ RAMDataParserMap = {
         "system"
         / Struct(
             "panel_status"
-            / BitStruct("installer_lock_active" / Flag, "_free" / Padding(7)),
+            / BitStruct("_installer_lock_active" / Flag, "_free" / Padding(7)),
             "event"
             / Struct("_event_pointer" / Int16ub, "_event_pointer_bus" / Int16ub,),
             "_recycle_system" / Array(8, Int8ub),
@@ -261,34 +261,34 @@ RAMDataParserMap = {
         ),
         "_free" / Padding(34),
     ),
-    5: Struct(
-        "_not_used" / Int8ub,
-        "module_trouble" / ModuleTroubles(count=63, start_index_from=1),
-    ),
-    6: Struct("module_trouble" / ModuleTroubles(count=64, start_index_from=64)),
-    7: Struct("module_trouble" / ModuleTroubles(count=64, start_index_from=128)),
-    8: Struct(
-        "module_trouble" / ModuleTroubles(count=63, start_index_from=192),
-        "_not_used" / Int8ub,
-    ),
-    9: Struct(
-        "zone_open" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
-        "zone_tamper" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
-        "zone_low_battery" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
-        "zone_status" / ZoneFlags(28, start_index_from=97),
-    ),
-    10: Struct("zone_status" / ZoneFlags(64, start_index_from=125)),
-    11: Struct(
-        "zone_status" / ZoneFlags(4, start_index_from=189), "_not_used" / Bytes(60),
-    ),
-    16: Struct( # TODO: here should be panel modules
-        "module_assigned" / BitsSwapped(Bitwise(StatusFlags(256, start_index_from=1))),
-        "module_missing" / BitsSwapped(Bitwise(StatusFlags(256, start_index_from=1))),
-    ),
+#    5: Struct(
+#        "_not_used" / Int8ub,
+#        "module_trouble" / ModuleTroubles(count=63, start_index_from=1),
+#    ),
+#    6: Struct("module_trouble" / ModuleTroubles(count=64, start_index_from=64)),
+#    7: Struct("module_trouble" / ModuleTroubles(count=64, start_index_from=128)),
+#    8: Struct(
+#        "module_trouble" / ModuleTroubles(count=63, start_index_from=192),
+#        "_not_used" / Int8ub,
+#    ),
+#    9: Struct(
+#        "zone_open" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
+#        "zone_tamper" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
+#        "zone_low_battery" / BitsSwapped(Bitwise(StatusFlags(96, start_index_from=97))),
+#        "zone_status" / ZoneFlags(28, start_index_from=97),
+#    ),
+#    10: Struct("zone_status" / ZoneFlags(64, start_index_from=125)),
+#    11: Struct(
+#        "zone_status" / ZoneFlags(4, start_index_from=189), "_not_used" / Bytes(60),
+#    ),
+#    16: Struct( # TODO: here should be panel modules
+#        "module_assigned" / BitsSwapped(Bitwise(StatusFlags(256, start_index_from=1))),
+#        "module_missing" / BitsSwapped(Bitwise(StatusFlags(256, start_index_from=1))),
+#    ),
     # 51: Doors [open, state, ...]
     # 56: Disarm delays
     57: Struct("pgm_status" / PGMFlags(16)),
-    58: Struct("pgm_status" / PGMFlags(16, start_index_from=17)),
+#    58: Struct("pgm_status" / PGMFlags(16, start_index_from=17)),
 }
 # We also need parsers for:
 # 17 ram address - EBUS Troubles 24 bytes
